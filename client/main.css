@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+
+
+.meteor-shower-bg {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); /* Noche estrellada */
+}
+
+.meteor-shower-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.8" /><circle cx="20" cy="80" r="0.5" fill="white" opacity="0.7" /><circle cx="70" cy="30" r="0.8" fill="white" opacity="0.9" /><circle cx="10" cy="10" r="0.6" fill="white" opacity="0.6" /><circle cx="90" cy="40" r="0.7" fill="white" opacity="0.8" /></svg>') repeat; /* Estrellas estáticas */
+  animation: twinkle 5s infinite alternate; /* Efecto de brillo suave */
+}
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(-45deg, white, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
+  animation: meteor-fall 5s linear infinite;
+  opacity: 0; /* Por defecto invisible */
+  /* Propiedades aleatorias para múltiples estrellas fugaces */
+}
+
+/* Ejemplo para una estrella, se necesitarían varias instancias con retrasos y posiciones aleatorias */
+.shooting-star:nth-child(1) {
+  top: -50px;
+  left: 10%;
+  animation-delay: 0s;
+}
+.shooting-star:nth-child(2) {
+  top: -100px;
+  left: 50%;
+  animation-delay: 2s;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+@keyframes meteor-fall {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; } /* Aparece rápidamente */
+  100% { transform: translate(200px, 400px) scale(0); opacity: 0; } /* Cae y se desvanece */
+}
